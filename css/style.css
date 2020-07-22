@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.main {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.main-title {
+  text-align: center;
+  font-size: 3em;
+  margin: 20px 0;
+}
+
+#label-block {
+  display: block;
+  font-size: 1.2em;
+}
+
+#search {
+  display: inline-block;
+  width: 90%;
+}
+
+.results {
+  margin: 30px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.div-side {
+  border: 1px solid #dddddd;
+  padding: 0 10px 20px;
+}
+
+.subtitle {
+  font-size: 2.2em;
+}
+
+.statistics-item {
+  margin: 5px 0;
+}
+
+.statistics-item-num {
+  font-weight: bold;
+}

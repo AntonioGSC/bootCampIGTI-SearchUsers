@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Search Users</title>
+  </head>
+  <body>
+    <div class="main">
+      <h1 class="main-title">Pesquisa de usuários</h1>
+      <div class="search-div">
+        <form action="" class="search-form">
+          <label id="label-block" for="search">Busca</label>
+          <input type="text" id="search" name="search" />
+          <input
+            class="waves-effect waves-light btn"
+            type="submit"
+            value="Buscar"
+            id="submit-form"
+          />
+        </form>
+      </div>
+      <div class="results">
+        <div class="div-side users-found">
+          <h2 class="subtitle">
+            <span class="number-users"></span> usuário(s) encontrado(s)
+          </h2>
+        </div>
+        <div class="div-side statistics">
+          <h2 class="subtitle">Estatísticas</h2>
+          <ul class="statistics">
+            <li class="statistics-item">
+              Sexo masculino:
+              <span class="statistics-item-num number-masc"></span>
+            </li>
+            <li class="statistics-item">
+              Sexo feminino:
+              <span class="statistics-item-num number-fem"></span>
+            </li>
+            <li class="statistics-item">
+              Soma das idades:
+              <span class="statistics-item-num number-sumAge"></span>
+            </li>
+            <li class="statistics-item">
+              Média das idades:
+              <span class="statistics-item-num number-medAge"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
