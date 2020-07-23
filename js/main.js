@@ -10,6 +10,7 @@ function start() {
   preventFormSubmit();
   activateInput();
   submitForm.disabled = true;
+  numberFormat = Intl.NumberFormat('pt-BR');
 }
 
 async function fetchUsers() {
@@ -58,16 +59,28 @@ function hideSpinner() {
 
 function render(filter) {
   filteredUsers = globalUsers.filter((user) => {
-    return user.firstName.includes(filter) || user.lastName.includes(filter);
+    return (
+      user.firstName.toLowerCase().includes(filter) ||
+      user.lastName.toLowerCase().includes(filter)
+    );
+  });
+
+  filteredUsers.sort((a, b) => {
+    return a.firstName.localeCompare(b.firstName);
   });
   renderUserList();
-  renderSumary();
+  renderSummary();
 }
 
 function renderUserList() {
   const divUsers = document.querySelector('.users-render');
   divUsers.innerHTML = `
     <div class='row'>
+      <h2 class="subtitle">
+        <span class="number-users">${
+          filteredUsers.length
+        }</span> usuário(s) encontrado(s)
+      </h2>
       ${filteredUsers
         .map(({ picture, firstName, lastName, age }) => {
           return `
@@ -84,4 +97,50 @@ function renderUserList() {
   `;
 }
 
-function renderSumary() {}
+function renderSummary() {
+  let medAge = 0;
+  const divStatistics = document.querySelector('.statistics-render');
+  let sexMasc = filteredUsers.reduce((accumulator, current) => {
+    current.gender === 'male' ? accumulator++ : accumulator;
+    return accumulator;
+  }, 0);
+  let sexFem = filteredUsers.reduce((accumulator, current) => {
+    current.gender === 'female' ? accumulator++ : accumulator;
+    return accumulator;
+  }, 0);
+  let sumAge = filteredUsers.reduce((accumulator, current) => {
+    return (accumulator += current.age);
+  }, 0);
+  filteredUsers.length !== 0
+    ? (medAge = sumAge / filteredUsers.length)
+    : (medAge = 0);
+
+  divStatistics.innerHTML = `
+    <h2 class="subtitle">Estatísticas</h2>
+    <ul class="statistics">
+      <li class="statistics-item">
+        Sexo masculino:
+        <span class="statistics-item-num number-masc">${sexMasc}</span>
+      </li>
+      <li class="statistics-item">
+        Sexo feminino:
+        <span class="statistics-item-num number-fem">${sexFem}</span>
+      </li>
+      <li class="statistics-item">
+        Soma das idades:
+        <span class="statistics-item-num number-sumAge">${formatNumber(
+          sumAge
+        )}</span>
+      </li>
+      <li class="statistics-item">
+        Média das idades:
+        <span class="statistics-item-num number-medAge">
+        ${formatNumber(medAge.toFixed(2))}</span>
+      </li>
+    </ul>
+  `;
+}
+
+function formatNumber(number) {
+  return numberFormat.format(number);
+}
